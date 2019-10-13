@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vuejs测试</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        当前日期为:
+        {{new Date(birthday).getFullYear()}}-{{new Date(birthday).getMonth()+1}}-{{new Date(birthday).getDay()}}
+        <hr>
+        日期:{{birth}}
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:"#app",
+            data:{
+                birthday:1429032123201,
+            },
+            computed:{
+                birth(){
+                    const date=new Date(this.birthday);
+                    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDay();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="js/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(user,index) in users">
+                {{index}}--{{user.name}}--{{user.age}}--{{user.gender}}
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:"#app",
+            data:{
+                users:[]
+            },
+            created(){
+                /*axios.get("data.json").then(res=>{
+                    //将数据赋值到vue实例中的数据属性users
+                    //不能使用this
+                    app.users=res.data;
+                }).catch(err=>alert(err));*/
+                axios.post("data.json").then(res=>{
+                    //将数据赋值到vue实例中的数据属性users
+                    //不能使用this
+                    app.users=res.data;
+                }).catch(err=>alert(err));
+            }
+        });
+    </script>
+</body>
+</html>

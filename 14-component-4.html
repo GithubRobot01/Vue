@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>子组件向父组件通信</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>num={{num}}</h2>
+        <!--使用组件-->
+        <counter @plus="numPlus" @reduce="numReduce" :snum="num"></counter>
+
+    </div>
+    <script type="text/javascript">
+        //定义组件
+        const counter={
+            template:`
+            <div>
+            <button @click='incrNum'>+</button>
+            <button @click='decrNum'>-</button>
+            </div>
+            `,
+            props:["snum"],
+            methods: {
+                incrNum(){
+                    return this.$emit("plus");
+                },
+                decrNum(){
+                    return this.$emit("reduce");
+                }
+            }
+        };
+
+        var app=new Vue({
+            el:"#app",
+            //局部注册组件
+            components:{
+                counter:counter
+            },
+            data:{
+                num:0,
+            },
+            methods:{
+                numPlus(){
+                    this.num++;
+                },
+                numReduce(){
+                    this.num--;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
